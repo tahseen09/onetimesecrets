@@ -23,7 +23,7 @@ class CreateSecretView(View):
 
         secret, nonce = SecretService.create_secret(data)
         link = f"{API_BASE_URL}/view/{secret.id}?key={nonce}"
-        return render(request, "show.html", {"link": link})
+        return render(request, "show.html", {"data": link})
 
 
 class ShowSecretView(View):
@@ -37,15 +37,15 @@ class ShowSecretView(View):
             data = SecretService.get_secret_data(secret_id=secret_id, nonce=nonce)
         except Secret.DoesNotExist:
             message = "Secret Not Found"
-            return HttpResponseNotFound(message)
+            return render(request, "show.html", {"data": message})
         except SecretExpiredError:
             message = "Secret Expired"
-            return HttpResponseNotFound(message)
+            return render(request, "show.html", {"data": message})
         except SecretViewedError:
             message = "Secret Already Opened"
-            return HttpResponseNotFound(message)
+            return render(request, "show.html", {"data": message})
         except Exception:
             message = "Server Error"
-            return HttpResponseServerError(message)
+            return render(request, "show.html", {"data": message})
         else:
             return render(request, "show.html", {"data": data})

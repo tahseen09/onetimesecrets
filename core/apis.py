@@ -48,8 +48,7 @@ class OTS(View):
         if not data:
             return HttpResponseBadRequest("No secret found in Request Body")
         try:
-            secret, nonce = Secret.encrypt(data)
-            secret.save()
+            secret, nonce = SecretService.create_secret(data)
             url = f"{API_BASE_URL}/api/{secret.id}?key={nonce}"
             return JsonResponse({"url": url})
         except Exception:

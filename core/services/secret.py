@@ -18,7 +18,16 @@ class SecretService:
         return secret.decrypt(nonce)
 
     @classmethod
-    def create_secret(cls, data: str, days: int = 7) -> str:
+    def create_secret(cls, data: str, days: int = 7) -> tuple:
+        """Encrypts the data and save in the Database
+
+        Args:
+            data (str): plain text user data
+            days (int, optional): Number of days to expire. Defaults to 7.
+
+        Returns:
+            tuple: Secret Database Object, The Password to Open the Secret
+        """
         secret, nonce = Secret.encrypt(data, days)
         secret.save()
-        return nonce
+        return secret, nonce

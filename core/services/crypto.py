@@ -1,6 +1,6 @@
 from Crypto.Cipher import AES
 
-from core.constants import ENCRYPTION_KEY
+from onetimesecrets.credentials import ENCRYPTION_KEY
 
 
 MODE = AES.MODE_EAX

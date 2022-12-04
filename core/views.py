@@ -1,7 +1,7 @@
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 from django.views import View
-from core.constants import API_BASE_URL
+from onetimesecrets.credentials import API_BASE_URL
 from core.exceptions import SecretExpiredError, SecretViewedError
 from core.models.ots import Secret
 

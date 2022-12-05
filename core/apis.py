@@ -10,7 +10,7 @@ from django.http import (
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-from core.constants import API_BASE_URL
+from onetimesecrets.credentials import API_BASE_URL
 from core.exceptions import SecretExpiredError, SecretViewedError
 from core.models.ots import Secret
 from core.services.secret import SecretService
